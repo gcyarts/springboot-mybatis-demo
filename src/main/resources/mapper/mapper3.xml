@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.products.Mapper.Ordermapper">
+    <resultMap id="BaseResultMap" type="com.example.products.Dao.Order">
+        <result column="id" property="id" jdbcType="VARCHAR"></result>
+        <result column="username" property="username" jdbcType="VARCHAR"></result>
+        <result column="ordername" property="ordername" jdbcType="VARCHAR"></result>
+        <result column="orderdate" property="orderdate" jdbcType="VARCHAR"></result>
+    </resultMap>
+    <resultMap id="ListResultMap" type="com.example.products.Dao.OrderList">
+        <result column="id" property="id" jdbcType="VARCHAR"></result>
+        <result column="ordername" property="ordername" jdbcType="VARCHAR" ></result>
+    </resultMap>
+    <!--查找语句-->
+    <!--resultMap表示函数返回的类型-->
+    <select id="selectName" parameterType="java.lang.String" resultMap="ListResultMap">
+        select * from orders where username = #{name};
+    </select>
+
+    <!--查找语句-->
+    <select id="selectDetail" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select * from orders where id = #{id};
+    </select>
+    <insert id="insertOrder" parameterType="com.example.products.Dao.Order">
+        insert into orders(username,ordername,orderdate)values(#{username},#{ordername},#{orderdate});
+    </insert>
+
+</mapper>
